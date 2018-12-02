@@ -5,4 +5,10 @@ data associated with the newly built trie into a specified output .txt file.
 
 # Components
 
-* [TrieDump.c](TrieDump.c)
+* [Main.c](Main.c): Acts as a main driver by making necessary function calls.
+
+* [TrieDump.c](TrieDump.c): Contains the meat of the program. Include functions like createTrie(), destroyTrie(), and writeTrie(), that are essential to program.
+
+* [TrieDump.h](TrieDump.h): Defines the TrieNode struct and the functions that are used in TrieDump.c.
+
+
