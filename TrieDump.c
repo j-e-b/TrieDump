@@ -4,51 +4,21 @@
 #include <string.h>
 #include "TrieDump.h"
 
-void writeTrieHelper(TrieNode *root, char *buffer, int t, FILE *out)
+// Destroys a Trie and all of it's associated counterparts.
+TrieNode *destroyTrie(TrieNode *root)
 {
 	int i;
 
-	// Just in (base) case.
-	if (root == NULL)
-	{
-		return;
-	}
-
-	// This node represents the end of a stored word. Let's write buffer.
-	if (root->count > 0)
-	{
-		fprintf(out, "%s (%d)\n", buffer, root->count);
-	}
-
-	// Ensure this string is properly terminated before potentially printing it.
-	buffer[t + 1] = '\0';
-
-	// Follow each non-null route, filling buffer accordingly.
 	for (i = 0; i < 26; i++)
 	{
-		buffer[t] = i + 'a';
-
 		if (root->children[i] != NULL)
 		{
-			writeTrieHelper(root->children[i], buffer, t + 1, out);
+			destroyTrie(root->children[i]);
 		}
 	}
 
-	// Place the NULL terminator at the end of buffer for this recursive call.
-	buffer[t] = '\0';
-}
-
-// Print all the strings represented in the trie rooted at this node.
-void writeTrie(TrieNode *root, char *outname)
-{
-	char buffer[1024];
-	buffer[0] = '\0';
-
-	FILE *out;
-
-	out = fopen(outname, "w");
-
-	writeTrieHelper(root, buffer, 0, out);
+	free(root);
+	return NULL;
 }
 
 // This function strips any non-alpha characters from a given string and
@@ -116,4 +86,51 @@ TrieNode *createTrie(char *filename)
 
 	fclose(ifp);
 	return root;
+}
+
+void writeTrieHelper(TrieNode *root, char *buffer, int t, FILE *out)
+{
+	int i;
+
+	// Just in (base) case.
+	if (root == NULL)
+	{
+		return;
+	}
+
+	// This node represents the end of a stored word. Let's write buffer.
+	if (root->count > 0)
+	{
+		fprintf(out, "%s (%d)\n", buffer, root->count);
+	}
+
+	// Ensure this string is properly terminated before potentially printing it.
+	buffer[t + 1] = '\0';
+
+	// Follow each non-null route, filling buffer accordingly.
+	for (i = 0; i < 26; i++)
+	{
+		buffer[t] = i + 'a';
+
+		if (root->children[i] != NULL)
+		{
+			writeTrieHelper(root->children[i], buffer, t + 1, out);
+		}
+	}
+
+	// Place the NULL terminator at the end of buffer for this recursive call.
+	buffer[t] = '\0';
+}
+
+// Print all the strings represented in the trie rooted at this node.
+void writeTrie(TrieNode *root, char *outname)
+{
+	char buffer[1024];
+	buffer[0] = '\0';
+
+	FILE *out;
+
+	out = fopen(outname, "w");
+
+	writeTrieHelper(root, buffer, 0, out);
 }

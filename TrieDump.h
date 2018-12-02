@@ -7,10 +7,16 @@ typedef struct TrieNode
 	struct TrieNode *children[26];
 } TrieNode;
 
+void writeTrieHelper(TrieNode *root, char *buffer, int t, FILE *out);
+
+void writeTrie(TrieNode *root, char *outname);
+
+void strip(char *str);
+
 TrieNode *createTrie(char *filename);
 
 void insert(TrieNode *temp, char *str);
 
-void dumpTrie(char *filename);
+TrieNode *destroyTrie(TrieNode *root);
 
 #endif
