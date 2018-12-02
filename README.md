@@ -11,4 +11,8 @@ data associated with the newly built trie into a specified output .txt file.
 
 * [TrieDump.h](TrieDump.h): Defines the TrieNode struct and the functions that are used in TrieDump.c.
 
+# Build & Run
 
+To compile: 'gcc Main.c TrieDump.c'
+
+To run: './a.out yourInput.txt yourOutput.txt'
