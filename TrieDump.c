@@ -14,7 +14,7 @@ void writeTrieHelper(TrieNode *root, char *buffer, int t, FILE *out)
 		return;
 	}
 
-	// This node represents the end of a stored word. Let's print buffer.
+	// This node represents the end of a stored word. Let's write buffer.
 	if (root->count > 0)
 	{
 		fprintf(out, "%s (%d)\n", buffer, root->count);
@@ -56,15 +56,7 @@ void writeTrie(TrieNode *root, char *outname)
 void strip(char *str)
 {
 	int i, j = 0, len = strlen(str);
-	char newStr[len + 1];
-
-	// In using strtok(), the last word in a given string will contain a '\n'
-	// character which we need to get rid of and decrement the string's length.
-	if (str[len - 1] == '\n')
-	{
-		str[len - 1] = '\0';
-		len--;
-	}
+	char buffer[len + 1];
 
 	for (i = 0; i < len; i++)
 	{
@@ -73,12 +65,12 @@ void strip(char *str)
 			continue;
 		}
 
-		newStr[j++] = tolower(str[i]);
+		buffer[j++] = tolower(str[i]);
 	}
 
-	newStr[j] = '\0';
+	buffer[j] = '\0';
 
-	strcpy(str, newStr);
+	strcpy(str, buffer);
 }
 
 void insert(TrieNode *temp, char *str)
@@ -92,7 +84,7 @@ void insert(TrieNode *temp, char *str)
 		return;
 	}
 
-	index = tolower(str[0]) - 'a';
+	index = str[0] - 'a';
 
 	// Allocate space if the appropriate child does not yet exist.
 	if (temp->children[index] == NULL)
@@ -124,14 +116,4 @@ TrieNode *createTrie(char *filename)
 
 	fclose(ifp);
 	return root;
-}
-
-int main(void)
-{
-	TrieNode *root = createTrie("corpus01.txt");
-	writeTrie(root, "test.txt");
-
-	// Stretch goal: Write a function that recursively destroys your trie.
-
-	return 0;
 }
