@@ -14,7 +14,7 @@ data associated with the newly built trie into a specified output .txt file.
 # Build & Run
 
 * To compile: 
-      gcc Main.c TrieDump.c
+      `gcc Main.c TrieDump.c`
 
 * To run:
-      ./a.out yourInput.txt yourOutput.txt
+      `./a.out yourInput.txt yourOutput.txt`
