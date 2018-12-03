@@ -1,14 +1,6 @@
 # Overview
 
-_____    _       ______                       
-|_   _|  (_)      |  _  \                      
-  | |_ __ _  ___  | | | |_   _ _ __ ___  _ __  
-  | | '__| |/ _ \ | | | | | | | '_ ` _ \| '_ \ 
-  | | |  | |  __/ | |/ /| |_| | | | | | | |_) |
-  \_/_|  |_|\___| |___/  \__,_|_| |_| |_| .__/ 
-                                        | |    
-                                        |_|  
-                                                              
+![test](https://imgur.com/a/bbqtTBl)
 
 TrieDump parses a .txt file and stores each word into a trie data structure (see https://en.wikipedia.org/wiki/Trie). It then dumps the
 data associated with the newly built trie into a specified output .txt file.
