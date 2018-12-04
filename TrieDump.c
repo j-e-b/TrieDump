@@ -134,18 +134,3 @@ void writeTrie(TrieNode *root, char *outname)
 
 	writeTrieHelper(root, buffer, 0, out);
 }
-
-/*int main(int argc, char **argv)
-{
-	// Unsuccesful.
-	if (argc != 3)
-	{
-		return -1;
-	}
-
-	TrieNode *root = createTrie("corpus06.txt");
-	writeTrie(root, "test.txt");
-	destroyTrie(root);
-
-	return 0;
-}*/
